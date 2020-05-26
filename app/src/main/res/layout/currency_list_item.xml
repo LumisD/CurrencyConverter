@@ -4,8 +4,6 @@
 
     <data>
 
-        <import type="android.view.View" />
-
         <variable
             name="data"
             type="com.vladus177.currencycheck.presentation.model.RateItem" />

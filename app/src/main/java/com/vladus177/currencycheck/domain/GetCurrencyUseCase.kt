@@ -5,8 +5,9 @@ import com.vladus177.currencycheck.data.repository.CurrencyRepository
 import com.vladus177.currencycheck.domain.model.CurrencyRequestParam
 import com.vladus177.currencycheck.domain.model.RatesModel
 import kotlinx.coroutines.Dispatchers
+import javax.inject.Inject
 
-class GetCurrencyUseCase(
+class GetCurrencyUseCase @Inject constructor(
     private val currencyRepository: CurrencyRepository
 ) : ResultUseCase<CurrencyRequestParam, RatesModel>(
     backgroundContext = Dispatchers.IO,

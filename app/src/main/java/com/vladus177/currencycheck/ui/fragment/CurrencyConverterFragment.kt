@@ -6,7 +6,8 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import com.vladus177.currencycheck.common.Result
 import com.vladus177.currencycheck.common.extensions.observe
 import com.vladus177.currencycheck.databinding.FragmentCurrencyConverterBinding
@@ -15,11 +16,14 @@ import com.vladus177.currencycheck.domain.model.fromDomainToUi
 import com.vladus177.currencycheck.presentation.CurrencyConverterViewModel
 import com.vladus177.currencycheck.ui.view.CurrencyListView
 import com.vladus177.currencycheck.ui.view.OnListItemClickListener
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import dagger.android.support.DaggerFragment
+import javax.inject.Inject
 
-class CurrencyConverterFragment : Fragment(), OnListItemClickListener, TextWatcher {
+class CurrencyConverterFragment : DaggerFragment(), OnListItemClickListener, TextWatcher {
 
-    private val viewModel: CurrencyConverterViewModel by viewModel()
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+    private val viewModel by viewModels<CurrencyConverterViewModel> { viewModelFactory }
     private lateinit var viewDataBinding: FragmentCurrencyConverterBinding
     private lateinit var listView: CurrencyListView
     private var amount: Long = DEFAULT_AMOUNT
@@ -45,13 +49,16 @@ class CurrencyConverterFragment : Fragment(), OnListItemClickListener, TextWatch
 
     private fun currencyObserver(result: Result<RatesModel>?) {
         when (result) {
-            is Result.OnLoading -> { }
+            is Result.OnLoading -> {
+            }
             is Result.OnSuccess -> {
                 viewDataBinding.loading = false
                 listView.setData(result.value.fromDomainToUi(amount))
             }
-            is Result.OnError -> { }
-            is Result.OnCancel -> { }
+            is Result.OnError -> {
+            }
+            is Result.OnCancel -> {
+            }
         }
     }
 

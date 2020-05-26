@@ -4,9 +4,9 @@ import com.vladus177.currencycheck.data.CurrencyDataMapper
 import com.vladus177.currencycheck.data.local.source.CurrencyLocalDataSource
 import com.vladus177.currencycheck.data.remote.source.CurrencyRemoteDataSource
 import com.vladus177.currencycheck.domain.model.RatesModel
+import javax.inject.Inject
 
-class CurrencyRepository(
-    private val currencyLocalDataSource: CurrencyLocalDataSource,
+class CurrencyRepository @Inject constructor(
     private val currencyRemoteDataSource: CurrencyRemoteDataSource,
     private val dataMapper: CurrencyDataMapper
 ) {

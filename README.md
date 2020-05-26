@@ -7,6 +7,7 @@ App updates information from remote Api every second.
 
 # Tech/framework used
 Kotlin, Clean Architecture, MVVM, Koin, Kotlin Coroutines, LiveData, Retrofit.
+**!! I forked the repo for testing purposes to change Dependency Injection from Koin to Dagger2**
 
 # Image
 ![image](https://github.com/Vladus177/CurrencyConverter/blob/master/app/screenshot.png?raw=true)

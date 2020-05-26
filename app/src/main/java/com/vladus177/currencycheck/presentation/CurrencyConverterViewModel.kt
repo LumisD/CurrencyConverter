@@ -5,8 +5,9 @@ import com.vladus177.currencycheck.common.extensions.LiveResult
 import com.vladus177.currencycheck.domain.GetCurrencyUseCase
 import com.vladus177.currencycheck.domain.model.CurrencyRequestParam
 import com.vladus177.currencycheck.domain.model.RatesModel
+import javax.inject.Inject
 
-class CurrencyConverterViewModel(private val getCurrencyUseCase: GetCurrencyUseCase) : ViewModel() {
+class CurrencyConverterViewModel @Inject constructor(private val getCurrencyUseCase: GetCurrencyUseCase) : ViewModel() {
 
     val currency = LiveResult<RatesModel>()
 

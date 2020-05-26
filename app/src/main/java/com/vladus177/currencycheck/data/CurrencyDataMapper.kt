@@ -5,8 +5,9 @@ import com.vladus177.currencycheck.common.extensions.getCurrencyNameFromCode
 import com.vladus177.currencycheck.data.remote.model.CurrencyResponseEntry
 import com.vladus177.currencycheck.domain.model.RatesItemModel
 import com.vladus177.currencycheck.domain.model.RatesModel
+import javax.inject.Inject
 
-class CurrencyDataMapper {
+class CurrencyDataMapper @Inject constructor() {
 
     fun CurrencyResponseEntry.fromDataToDomain() = RatesModel(
         currencyCode = baseCurrency,

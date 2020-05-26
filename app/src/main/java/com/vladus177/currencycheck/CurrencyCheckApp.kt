@@ -1,21 +1,22 @@
 package com.vladus177.currencycheck
 
-import android.app.Application
-import com.vladus177.currencycheck.di.appModule
-import org.koin.android.ext.koin.androidContext
-import org.koin.core.context.startKoin
+import androidx.databinding.library.BuildConfig
+import com.vladus177.currencycheck.di.DaggerApplicationComponent
+import dagger.android.AndroidInjector
+import dagger.android.DaggerApplication
+import timber.log.Timber
 
 
-class CurrencyCheckApp : Application() {
+open class CurrencyCheckApp : DaggerApplication() {
+
     override fun onCreate() {
         super.onCreate()
-        initKoin()
+
+        if (BuildConfig.DEBUG) Timber.plant(Timber.DebugTree())
     }
 
-    private fun initKoin() {
-        startKoin {
-            androidContext(this@CurrencyCheckApp)
-            modules(listOf(appModule))
-        }
+    override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
+
+        return DaggerApplicationComponent.factory().create(applicationContext)
     }
 }
